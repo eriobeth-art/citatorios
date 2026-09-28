@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Citatorios EPOANT</title>
+<style>
+html,body{margin:0;width:100%;height:100%;background:#f4f7fa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+#wrap{width:100%;height:100%;display:grid;place-items:center}
+iframe{border:0;width:100%;height:100%;background:#fff}
+.card{max-width:520px;margin:22px;background:#fff;border:1px solid #d7e1e9;border-radius:18px;padding:24px;text-align:center;color:#18324a;box-shadow:0 10px 28px rgba(18,61,104,.08)}
+.logo{width:54px;height:54px;border-radius:15px;background:#123d68;color:#fff;display:grid;place-items:center;font-weight:900;margin:auto}
+small{color:#667b8d}
+</style>
+</head>
+<body>
+<div id="wrap"></div>
+<script>
+/*
+  PEGA AQUÍ LA URL /exec DE TU IMPLEMENTACIÓN ACTUAL DE GOOGLE APPS SCRIPT.
+  Ejemplo:
+  const APPS_SCRIPT_EXEC = 'https://script.google.com/macros/s/AKfy.../exec';
+*/
+const APPS_SCRIPT_EXEC = 'PEGA_AQUI_TU_URL_EXEC';
+
+const params = new URLSearchParams(location.search);
+const code = (params.get('c') || '').trim();
+
+const wrap = document.getElementById('wrap');
+
+if (!code) {
+  wrap.innerHTML = `
+    <div class="card">
+      <div class="logo">EO</div>
+      <h2>Citatorios EPOANT</h2>
+      <p>Portal de notificación y acuse de recepción.</p>
+      <small>Escuela Preparatoria Oficial Anexa a la Normal de Tejupilco · Turno Matutino</small>
+    </div>`;
+} else if (APPS_SCRIPT_EXEC.includes('PEGA_AQUI')) {
+  wrap.innerHTML = `
+    <div class="card">
+      <div class="logo">EO</div>
+      <h2>Configuración pendiente</h2>
+      <p>El portal aún no tiene configurada la dirección interna de Google Apps Script.</p>
+    </div>`;
+} else {
+  const iframe = document.createElement('iframe');
+  iframe.src = APPS_SCRIPT_EXEC.replace(/\/$/,'') + '?t=' + encodeURIComponent(code);
+  iframe.title = 'Citatorio EPOANT';
+  iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+  iframe.allow = 'clipboard-write';
+  wrap.replaceChildren(iframe);
+}
+</script>
+</body>
+</html>
